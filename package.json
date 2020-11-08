@@ -1,5 +1,5 @@
 {
-  "name": "api-perso",
+  "name": "helper-app-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,8 +7,8 @@
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "christophe Parmentier",
-  "license": "ISC",
+  "author": "Gyanesh Gupta",
+  "license": "common",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",

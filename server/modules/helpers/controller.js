@@ -59,10 +59,8 @@ export const deleteHelper = async (req, res) => {
 
 export const getHelperById = async (req, res) => {
   try {
-    const buf = Buffer.alloc(16);
     const helperId = req.params.id.replace(/[-]/g, '');
-    console.log(helperId);
-
+    
     const helper = await models.Helper.findOne({
       where: { 
         id: helperId 
@@ -100,13 +98,55 @@ export const getCooksByLocation = async (req, res) => {
 
 export const getHousekeepByLocation = async (req, res) => {
   try {
-    const location = req.params.id;
+    const location = req.params.location;
 
     const helpers = await models.Helper.findAll({
       where: {
-        roles: 0,
-        location: {
+        roles: "0",
+        locations: {
         [Op.like]: '%'+ location + '%'
+      } },
+    });
+    if (helpers) {
+      return res.status(200).json({ helper });
+    }
+    return res.status(404).json(errorHandling('Housekeep with the specified location does not exists'));
+  } catch (error) {
+    return res.status(500).json(errorHandling(error.message));
+  }
+};
+
+export const getCooksByName = async (req, res) => {
+  try {
+    //only bengaluru for now
+    const location = req.params.name;
+
+    //for now just a simple substring
+    const helpers = await models.Helper.findAll({
+      where: {
+        roles: "1",
+        name: {
+        [Op.like]: '%'+ name + '%'
+      } },
+    });
+    if (helpers) {
+      return res.status(200).json({ helpers });
+    }
+    return res.status(404).json(errorHandling('Cooks with the specified location does not exists'));
+  } catch (error) {
+    return res.status(500).json(errorHandling(error.message));
+  }
+};
+
+export const getHousekeepByName = async (req, res) => {
+  try {
+    const location = req.params.name;
+
+    const helpers = await models.Helper.findAll({
+      where: {
+        roles: "0",
+        names: {
+        [Op.like]: '%'+ name + '%'
       } },
     });
     if (helpers) {

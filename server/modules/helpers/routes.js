@@ -17,8 +17,11 @@ routes.post('/helpers', HelperController.createHelper);
 routes.delete('/helpers/:id', HelperController.deleteHelper);
 routes.put('/helpers/:id', HelperController.updateHelper);
 
-//custom filter, name
+//by name
+routes.get('/housekeep/:name', HelperController.getHousekeepByName);
+routes.get('/cooks/:name', HelperController.getCooksByName);
 
+//custom filter
 //add a helper for a given user
 //get a helper for a particular slot
 
