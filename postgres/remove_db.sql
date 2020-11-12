@@ -1,0 +1,3 @@
+DROP DATABASE  IF EXISTS  "helper_app";
+
+DROP USER IF EXISTS admin;

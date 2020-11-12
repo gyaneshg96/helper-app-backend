@@ -1,9 +1,10 @@
-docker run -d -p 5432:5432 --name postgres_server -e POSTGRES_PASSWORD=mysecretpassword postgres
-docker exec -it my-postgres hostname -I
-docker cp postgres/init_db.sql my-postgres:docker-entrypoint-initdb.d/init_db.sql
-docker exec -it my-postgres psql -U postgres -f docker-entrypoint-initdb.d/init_db.sql
+#!/bin/bash
 
-sequelize db:migrate
-sequelize db:seed:all
+cd /usr/src/helper_app
 
+echo "initializing tables and data"
+node_modules/.bin/sequelize db:migrate
+node_modules/.bin/sequelize sequelize db:seed:all
+
+echo "starting server"
 yarn dev

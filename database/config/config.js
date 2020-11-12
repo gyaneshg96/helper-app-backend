@@ -23,7 +23,7 @@ module.exports = {
     "username": "admin",
     "password": "password",
     "database": "helper_app",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "postgres"
   }
 };

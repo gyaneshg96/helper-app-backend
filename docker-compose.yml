@@ -1,0 +1,23 @@
+version: '1'
+
+services:
+  postgres:
+    build: ./postgres
+    healthcheck:
+      test: "exit 0"
+  budgeteala:
+    build: ./
+    depends_on:
+      - postgres
+    environment:
+      - NODE_ENV=production
+      - BUDGETEALA_PORT=5000
+      - BUDGETEALA_SECRET=budgeteala_secret
+      - BUDGETEALA_VERSION=0.0.1
+      - BUDGETEALA_AUTH_COOKIE=bauth
+      - DB_USERNAME=budgeteala
+      - DB_PASSWORD=budgeteala
+      - DB_NAME=budgeteala
+      - DB_HOST=mysql
+      - DB_LOGGING=false
+      - DB_DIALECT=mysql

@@ -38,6 +38,9 @@ module.exports = (sequelize, DataTypes) => {
         city:{
           type: DataTypes.STRING
         },
+        roles:{
+          type: DataTypes.STRING
+        },
         locations: {
           type: DataTypes.STRING,
         }
