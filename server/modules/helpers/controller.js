@@ -31,6 +31,15 @@ export const getAllHousekeep = async (req, res) => {
   }
 };
 
+export const getAllHelpers = async (req, res) => {
+  try {
+    const helpers = await models.Helper.findAll();
+    return res.status(200).json({ helpers });
+  } catch (error) {
+    return res.status(500).json(errorHandling(error.message));
+  }
+};
+
 export const createHelper = async (req, res) => {
   try {
     const helper = await models.Helper.create(req.body);
@@ -108,7 +117,26 @@ export const getHousekeepByLocation = async (req, res) => {
       } },
     });
     if (helpers) {
-      return res.status(200).json({ helper });
+      return res.status(200).json({ helpers });
+    }
+    return res.status(404).json(errorHandling('Housekeep with the specified location does not exists'));
+  } catch (error) {
+    return res.status(500).json(errorHandling(error.message));
+  }
+};
+
+export const getHelpersByLocation = async (req, res) => {
+  try {
+    const location = req.params.location;
+
+    const helpers = await models.Helper.findAll({
+      where: {
+        locations: {
+        [Op.like]: '%'+ location + '%'
+      } },
+    });
+    if (helpers) {
+      return res.status(200).json({ helpers });
     }
     return res.status(404).json(errorHandling('Housekeep with the specified location does not exists'));
   } catch (error) {
@@ -150,9 +178,28 @@ export const getHousekeepByName = async (req, res) => {
       } },
     });
     if (helpers) {
-      return res.status(200).json({ helper });
+      return res.status(200).json({ helpers });
     }
     return res.status(404).json(errorHandling('Housekeep with the specified location does not exists'));
+  } catch (error) {
+    return res.status(500).json(errorHandling(error.message));
+  }
+};
+
+export const getHelpersByName = async (req, res) => {
+  try {
+    const location = req.params.name;
+
+    const helpers = await models.Helper.findAll({
+      where: {
+        names: {
+        [Op.like]: '%'+ name + '%'
+      } },
+    });
+    if (helpers) {
+      return res.status(200).json({ helpers });
+    }
+    return res.status(404).json(errorHandling('Helper with the specified location does not exists'));
   } catch (error) {
     return res.status(500).json(errorHandling(error.message));
   }

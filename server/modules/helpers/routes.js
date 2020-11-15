@@ -6,10 +6,12 @@ const routes = new Router();
 //all
 routes.get('/housekeep', HelperController.getAllHousekeep);
 routes.get('/cooks', HelperController.getAllCooks);
+routes.get('/helpers', HelperController.getAllHelpers);
 
 //by location
 routes.get('/housekeep/:location', HelperController.getHousekeepByLocation);
 routes.get('/cooks/:location', HelperController.getCooksByLocation);
+routes.get('/helpers/:location', HelperController.getHelpersByLocation);
 
 //get all details
 routes.get('/helpers/:id', HelperController.getHelperById);
@@ -20,6 +22,7 @@ routes.put('/helpers/:id', HelperController.updateHelper);
 //by name
 routes.get('/housekeep/:name', HelperController.getHousekeepByName);
 routes.get('/cooks/:name', HelperController.getCooksByName);
+routes.get('/helpers/:name', HelperController.getHelpersByName);
 
 //custom filter
 //add a helper for a given user
