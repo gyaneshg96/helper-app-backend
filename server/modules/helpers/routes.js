@@ -3,6 +3,9 @@ import * as HelperController from './controller';
 
 const routes = new Router();
 
+//healthcheck
+routes.get('/healthcheck', HelperController.performHealthCheck);
+
 //all
 routes.get('/housekeep', HelperController.getAllHousekeep);
 routes.get('/cooks', HelperController.getAllCooks);

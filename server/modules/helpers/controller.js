@@ -5,6 +5,21 @@ const uuid = require('uuid');
 
 const Op = Sequelize.Op;
 
+export const performHealthCheck = (req, res) => {
+  const healthcheck = {
+		uptime: process.uptime(),
+		message: 'OK',
+		timestamp: Date.now()
+	};
+	try {
+    console.log(healthcheck);
+		return res.status(200).json({healthcheck});
+	} catch (e) {
+		healthcheck.message = e;
+		return res.status(503).json(healthcheck.message);
+	}
+};
+
 export const getAllCooks = async (req, res) => {
   try {
     const helpers = await models.Helper.findAll({
